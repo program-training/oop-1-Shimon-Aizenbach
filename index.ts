@@ -84,44 +84,82 @@ import { log } from "console";
 // console.log(rectangle2.info());
 
 // 4. Method Chaining
-class Rectangle {
-  hight: number;
-  width: number;
+// class Rectangle {
+//   hight: number;
+//   width: number;
 
-  constructor(hight: number, width: number) {
-    this.hight = hight;
-    this.width = width;
-  }
+//   constructor(hight: number, width: number) {
+//     this.hight = hight;
+//     this.width = width;
+//   }
 
-  area(): number {
-    return this.hight * this.width;
-  }
+//   area(): number {
+//     return this.hight * this.width;
+//   }
 
-  info(): string {
-    return `This is a Rectangle`;
-  }
+//   info(): string {
+//     return `This is a Rectangle`;
+//   }
 
-  scale(coefficient: number): Rectangle {
-    this.hight *= coefficient;
-    this.width *= coefficient;
-    return this;
-  }
+//   scale(coefficient: number): Rectangle {
+//     this.hight *= coefficient;
+//     this.width *= coefficient;
+//     return this;
+//   }
 
-  areaAddition(rectangle1: Rectangle, rectangle2: Rectangle): Rectangle {
-    const newRectangle = new Rectangle(
-      rectangle1.hight + rectangle2.hight,
-      rectangle1.width + rectangle2.width
-    );
-    return newRectangle;
+//   static areaAddition(rectangle1: Rectangle, rectangle2: Rectangle): Rectangle {
+//     const newRectangle = new Rectangle(
+//       rectangle1.hight + rectangle2.hight,
+//       rectangle1.width + rectangle2.width
+//     );
+//     return newRectangle;
+//   }
+// }
+
+// const rectangle1 = new Rectangle(8, 4);
+// rectangle1.scale(2).scale(2);
+// console.log(rectangle1.area());
+
+// const rectangle2 = new Rectangle(2, 1);
+// const rectangle3 = Rectangle.areaAddition(rectangle1, rectangle2);
+// console.log(rectangle3);
+
+// 5. Shape with draw method
+class Shape {
+  constructor() {}
+
+  draw(): void {
+    console.log(`drawing a Shape`);
   }
 }
 
-const rectangle1 = new Rectangle(8, 4);
-rectangle1.scale(2).scale(2);
-console.log(rectangle1.area());
+class Triangle extends Shape {
+  draw(): void {
+    console.log(`drawing a Triangle`);
+  }
+}
 
-const rectangle2 = new Rectangle(2, 1);
-const rectangle3 = rectangle2.areaAddition(rectangle1, rectangle2)
-console.log(rectangle3);
+class Circle extends Shape {
+  draw(): void {
+    console.log(`drawing a Circle`);
+  }
+}
 
-// 5. Shape with draw method
+class Square extends Shape {
+  draw(): void {
+    console.log(`drawing a Square`);
+  }
+}
+
+function renderShapes(arr: Shape[]): void {
+  arr.forEach((shape) => shape.draw());
+}
+
+const arrayOfShapes: Shape[] = [
+  new Triangle(),
+  new Circle(),
+  new Square(),
+  new Triangle(),
+];
+
+renderShapes(arrayOfShapes);
