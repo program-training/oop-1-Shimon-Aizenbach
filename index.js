@@ -1,20 +1,5 @@
 "use strict";
 // את הקוד שלכם תכתבו כאן
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = function (d, b) {
-        extendStatics = Object.setPrototypeOf ||
-            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
-        return extendStatics(d, b);
-    };
-    return function (d, b) {
-        if (typeof b !== "function" && b !== null)
-            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
 Object.defineProperty(exports, "__esModule", { value: true });
 //  1. Rectangle - מלבן
 // class Rectangle {
@@ -44,21 +29,46 @@ Object.defineProperty(exports, "__esModule", { value: true });
 // console.log(square1);
 // console.log(square1.area());
 // 3. Shape - צורה
-var Shape = /** @class */ (function () {
-    function Shape() {
-    }
-    Shape.prototype.info = function () {
-        return "This is a Shape";
-    };
-    return Shape;
-}());
-var Rectangle = /** @class */ (function (_super) {
-    __extends(Rectangle, _super);
+// class Shape {
+//   info(): string {
+//     return `This is a Shape`;
+//   }
+// }
+// class Rectangle extends Shape {
+//   hight: number;
+//   width: number;
+//   constructor(hight: number, width: number) {
+//     this.hight = hight;
+//     this.width = width;
+//   }
+//   area(): number {
+//     return this.hight * this.width;
+//   }
+//   info(): string {
+//     return `This is a Rectangle`;
+//   }
+// }
+// class ColoredRectangle extends Rectangle {
+//   color: string;
+//   constructor(hight: number, width: number, color: string) {
+//     super(hight, width);
+//     this.color = color;
+//   }
+//   info(): string {
+//       return `This is a ${this.color} Rectangle`
+//   }
+// }
+// const shape1 = new Shape
+// console.log(shape1.info());
+// const rectangle1 = new Rectangle(8, 4)
+// console.log(rectangle1.info());
+// const rectangle2 = new ColoredRectangle(8, 4, `red`)
+// console.log(rectangle2.info());
+// 4. Method Chaining
+var Rectangle = /** @class */ (function () {
     function Rectangle(hight, width) {
-        var _this = this;
-        _this.hight = hight;
-        _this.width = width;
-        return _this;
+        this.hight = hight;
+        this.width = width;
     }
     Rectangle.prototype.area = function () {
         return this.hight * this.width;
@@ -66,25 +76,21 @@ var Rectangle = /** @class */ (function (_super) {
     Rectangle.prototype.info = function () {
         return "This is a Rectangle";
     };
-    return Rectangle;
-}(Shape));
-var ColoredRectangle = /** @class */ (function (_super) {
-    __extends(ColoredRectangle, _super);
-    function ColoredRectangle(hight, width, color) {
-        var _this = _super.call(this, hight, width) || this;
-        _this.color = color;
-        return _this;
-    }
-    ColoredRectangle.prototype.info = function () {
-        return "This is a ".concat(this.color, " Rectangle");
+    Rectangle.prototype.scale = function (coefficient) {
+        this.hight *= coefficient;
+        this.width *= coefficient;
+        return this;
     };
-    return ColoredRectangle;
-}(Rectangle));
-var shape1 = new Shape;
-console.log(shape1.info());
+    Rectangle.prototype.areaAddition = function (rectangle1, rectangle2) {
+        var newRectangle = new Rectangle(rectangle1.hight + rectangle2.hight, rectangle1.width + rectangle2.width);
+        return newRectangle;
+    };
+    return Rectangle;
+}());
 var rectangle1 = new Rectangle(8, 4);
-console.log(rectangle1.info());
-var rectangle2 = new ColoredRectangle(8, 4, "red");
-console.log(rectangle2.info());
-// 4. Method Chaining
+rectangle1.scale(2).scale(2);
+console.log(rectangle1.area());
+var rectangle2 = new Rectangle(2, 1);
+var rectangle3 = rectangle2.areaAddition(rectangle1, rectangle2);
+console.log(rectangle3);
 // 5. Shape with draw method
